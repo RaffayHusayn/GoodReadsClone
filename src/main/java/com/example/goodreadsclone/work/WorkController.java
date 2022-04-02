@@ -29,6 +29,7 @@ public class WorkController {
             Work book = bookOptional.get();
             model.addAttribute("title", book.getTitle());
             model.addAttribute("authorsList", book.getAuthorNames());
+            model.addAttribute("pubishedDate", book.getPublishedDate());
             return "book";
         }else {
             return "book-not-found";
