@@ -11,13 +11,14 @@
 <div class="card">
     <div class="row g-0">
         <div class="col-md-4">
-            <img th:src="@{https://covers.openlibrary.org/b/isbn/9780385533225-L.jpg}" class="img-fluid rounded-start" alt="...">
+            <img th:src="${coverImage}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title display-1" th:text="${title}">Card title</h5>
-                <p class="card-text display-5" th:text="${authorsList}">[Author, Name, List]</p>
-                <p class="card-text" ><small class="text-muted" th:text="${pubishedDate}">Last updated 3 mins ago</small></p>
+                <h5 class="card-title display-1" th:text="${book.title}">Card title</h5>
+                <p class="card-text display-5" th:text="${book.authorNames}">[Author, Name, List]</p>
+                <p class="card-text display-5" th:text="${book.description}">[Author, Name, List]</p>
+                <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small></p>
             </div>
         </div>
     </div>
