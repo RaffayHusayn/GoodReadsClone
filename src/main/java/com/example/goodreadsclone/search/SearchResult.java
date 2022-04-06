@@ -1,7 +1,10 @@
 package com.example.goodreadsclone.search;
 
+import java.util.List;
+
 public class SearchResult {
-    int numFound;
+    private int numFound;
+    private List<SearchResultBook> docs;
 
     public int getNumFound() {
         return numFound;
@@ -11,4 +14,11 @@ public class SearchResult {
         this.numFound = numFound;
     }
 
+    public List<SearchResultBook> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(List<SearchResultBook> docs) {
+        this.docs = docs;
+    }
 }
