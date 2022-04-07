@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Controller
 public class SearchController {
 
+    private final String COVER_IMAGE_ROOT = "https://covers.openlibrary.org/b/id/";
     private final WebClient webClient;
 
     public SearchController(WebClient.Builder webClientBuilder) {
@@ -34,8 +35,19 @@ public class SearchController {
         SearchResult searchResult = searchResultMono.block();
         List<SearchResultBook> booksLimited = searchResult.getDocs()
                 .stream()
+                .map(book -> {
+                    String bookCoverString = "/images/no-image.png" ;
+                    //setting the correct image src String
+                    if(book.getCover_i()!=null) {
+                        bookCoverString = COVER_IMAGE_ROOT + book.getCover_i() + "-M.jpg";
+                    }
+                    book.setCover_i(bookCoverString);
+                    book.setKey(book.getKey().replace("/works/",""));
+                    return book;
+                })
                 .limit(10)
                 .collect(Collectors.toList());
+
         model.addAttribute("searchResult", booksLimited);
         return "search";
     }
