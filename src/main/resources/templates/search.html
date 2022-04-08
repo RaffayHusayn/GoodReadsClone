@@ -11,16 +11,17 @@
 
 <div th:insert="components/nav-search :: nav-search-panel"></div>
 <div class="card-group">
-    <div class="card" style="flex:0 0 15%; margin: 30px;" th:each="book : ${searchResult}">
+    <div class="card" style="flex:0 0 15%; margin: 2.5%;" th:each="book : ${searchResult}">
         <img th:src="${book.cover_i}" class="card-img-top" alt="..." >
         <div class="card-body">
             <h5 class="card-title" th:text="${book.title}">Card title</h5>
             <small class="text-muted" th:text="${book.author_name}">2020-01-01</small>
             <p class="card-text">Published Year: <small class="text-muted" th:text="${book.first_publish_year}">2020-01-01</small></p>
-            <a href="#" th:href="@{'/book/'+${book.key}}" class="btn btn-primary">View Book</a>
+            <a href="#" th:href="@{'/book/'+${book.key}}" class="btn btn-success">View Book</a>
         </div>
     </div>
 </div>
+
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
