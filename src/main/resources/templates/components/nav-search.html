@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="nav-search-panel">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">Good Reads Clone</a>
+            <form class="d-flex" action="search.html" th:attr="action=@{/search}">
+                <input type="text" class="form-control me-2" name="query" placeholder="Search for a title..."
+                       aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+
+</body>
+</html>
