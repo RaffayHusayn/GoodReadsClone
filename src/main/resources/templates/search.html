@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div th:insert="components/book-search :: search-panel"></div>
+<div th:insert="components/nav-search :: nav-search-panel"></div>
 <div class="card-group">
     <div class="card" style="flex:0 0 15%; margin: 30px;" th:each="book : ${searchResult}">
         <img th:src="${book.cover_i}" class="card-img-top" alt="..." >
