@@ -22,6 +22,9 @@
                 <p class="card-text display-5" th:text="${book.authorNames}">[Author, Name, List]</p>
                 <p class="card-text display-5" th:text="${book.description}">[Author, Name, List]</p>
                 <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small></p>
+                <div th:if="${loginId}">
+                    <h2>user is logged in<p th:text="${loginId}">user name</p></h2>
+                </div>
             </div>
         </div>
     </div>
