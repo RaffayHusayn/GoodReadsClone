@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="readingStatus" class="form-label">Reading Status</label>
-                            <select id="readingStatus" class="form-select" aria-label="REading Status">
+                            <select id="readingStatus" class="form-select" aria-label="Reading Status" name="readingStatus">
                                 <option selected value="0">Reading Status</option>
                                 <option value="reading">Reading</option>
                                 <option value="finished">Finished</option>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col">
                             <label for="rating" class="form-label">Rating</label>
-                            <select id="rating" class="form-select" aria-label="Rating">
+                            <select id="rating" class="form-select" aria-label="Rating" name="rating">
                                 <option selected value="0">Book Rating</option>
                                 <option value="1">✰</option>
                                 <option value="2">✰ ✰</option>
@@ -50,14 +50,17 @@
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="startDate" class="form-label">Start Date</label>
-                            <input type="date" class="form-control" id="startDate">
+                            <input type="date" class="form-control" id="startDate" name="startDate">
                         </div>
                         <div class="mb-3 col">
                             <label for="completedDate" class="form-label">Completed Date</label>
-                            <input type="date" class="form-control" id="completedDate">
+                            <input type="date" class="form-control" id="completedDate" name="completedDate">
                         </div>
                     </div>
-                        <input type="submit" class="btn btn-success">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <input type="submit" class="btn btn-success">
                 </form>
             </div>
         </div>
