@@ -28,7 +28,8 @@
                     <div class="row">
                         <div class="col">
                             <label for="readingStatus" class="form-label">Reading Status</label>
-                            <select id="readingStatus" class="form-select" aria-label="Reading Status" name="readingStatus">
+                            <select id="readingStatus" class="form-select" aria-label="Reading Status"
+                                    name="readingStatus">
                                 <option selected value="0">Reading Status</option>
                                 <option value="reading">Reading</option>
                                 <option value="finished">Finished</option>
@@ -57,9 +58,15 @@
                             <input type="date" class="form-control" id="completedDate" name="completedDate">
                         </div>
                     </div>
+
+<!--                    hidden input for csrf token-->
                     <input type="hidden"
                            th:name="${_csrf.parameterName}"
                            th:value="${_csrf.token}"/>
+<!--                    hidden bookID to send to the UserBooksController-->
+                    <input type="hidden"
+                           name="bookId"
+                           th:value="${book.id}"/>
                     <input type="submit" class="btn btn-success">
                 </form>
             </div>

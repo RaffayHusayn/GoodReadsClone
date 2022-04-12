@@ -37,6 +37,8 @@ public class UserBooks {
     @CassandraType(type = Name.DATE)
     private LocalDate dateCompleted;
 
+
+
     public UserBooksPrimaryKey getKey() {
         return key;
     }
