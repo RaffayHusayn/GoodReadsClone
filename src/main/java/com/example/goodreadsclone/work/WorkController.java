@@ -1,5 +1,8 @@
 package com.example.goodreadsclone.work;
 
+import com.example.goodreadsclone.userbooks.UserBooks;
+import com.example.goodreadsclone.userbooks.UserBooksPrimaryKey;
+import com.example.goodreadsclone.userbooks.UserBooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,10 +18,13 @@ public class WorkController {
 
     private final String COVER_IMAGE_ROOT = "https://covers.openlibrary.org/b/id/";
     private WorkRepository workRepository;
+    private UserBooksRepository userBooksRepository;
     @Autowired
     public void setWorkRepository(WorkRepository workRepository){
         this.workRepository= workRepository;
     }
+    @Autowired
+    public void setUserBooksRepository(UserBooksRepository userBooksRepository){ this.userBooksRepository = userBooksRepository;}
 
     @GetMapping("/")
     public String getHome(){
@@ -37,7 +43,21 @@ public class WorkController {
             model.addAttribute("book", book);
             model.addAttribute("coverImage" , coverImage);
             if(principal != null && principal.getAttribute("login")!= null){
+                // if the user if logged in do the following:
+                //1. Send the loginId of the user to the book template
                 model.addAttribute("loginId", principal.getAttribute("login"));
+                //2. Send the UserBooks object to the book template containing all the previous user interaction with this book
+                // like rating, reading status, startedDate, completedDate
+                UserBooksPrimaryKey primaryKey = new UserBooksPrimaryKey();
+                primaryKey.setBookId(bookId);
+                primaryKey.setUserId(principal.getAttribute("login"));
+                Optional<UserBooks> userBooksOptional =  userBooksRepository.findById(primaryKey);
+                if(userBooksOptional.isPresent()){
+                    model.addAttribute("userBooks", userBooksOptional.get());
+                }else{
+                    model.addAttribute("userBooks", new UserBooks());
+                }
+
             }
             return "book";
         }else {
