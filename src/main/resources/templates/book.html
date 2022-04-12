@@ -29,7 +29,7 @@
                         <div class="col">
                             <label for="readingStatus" class="form-label">Reading Status</label>
                             <select id="readingStatus" class="form-select" aria-label="Reading Status"
-                                    name="readingStatus">
+                                    name="readingStatus" th:field="${userBooks.readingStatus}">
                                 <option selected value="0">Reading Status</option>
                                 <option value="reading">Reading</option>
                                 <option value="finished">Finished</option>
@@ -38,24 +38,27 @@
                         </div>
                         <div class="col">
                             <label for="rating" class="form-label">Rating</label>
-                            <select id="rating" class="form-select" aria-label="Rating" name="rating">
+                            <select id="rating" class="form-select" aria-label="Rating"
+                                    name="rating" th:field="${userBooks.rating}">
                                 <option selected value="0">Book Rating</option>
                                 <option value="1">✰</option>
                                 <option value="2">✰ ✰</option>
                                 <option value="3">✰ ✰ ✰ ✰</option>
                                 <option value="4">✰ ✰ ✰ ✰ ✰</option>
-                                <option value="4">✰ ✰ ✰ ✰ ✰ ✰</option>
+                                <option value="5">✰ ✰ ✰ ✰ ✰ ✰</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="startDate" class="form-label">Start Date</label>
-                            <input type="date" class="form-control" id="startDate" name="startDate">
+                            <input type="date" class="form-control" id="startDate"
+                                   name="startDate" th:value="${userBooks.dateStarted}">
                         </div>
                         <div class="mb-3 col">
                             <label for="completedDate" class="form-label">Completed Date</label>
-                            <input type="date" class="form-control" id="completedDate" name="completedDate">
+                            <input type="date" class="form-control" id="completedDate"
+                                   name="completedDate" th:value="${userBooks.dateCompleted}">
                         </div>
                     </div>
 
