@@ -8,73 +8,75 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-
 <div th:insert="components/nav-search :: nav-search-panel"></div>
 
+<div class="container">
+    <section class="content">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img th:src="${coverImage}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title display-1" th:text="${book.title}">Card title</h5>
+                        <p class="card-text display-5" th:text="${book.authorNames}">[Author, Name, List]</p>
+                        <p class="card-text display-5" th:text="${book.description}">[Author, Name, List]</p>
+                        <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small>
+                        </p>
+                        <form th:if="${loginId}" th:attr="action=@{/addUserBook}" method="POST">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="readingStatus" class="form-label">Reading Status</label>
+                                    <select id="readingStatus" class="form-select" aria-label="Reading Status"
+                                            name="readingStatus" th:field="${userBooks.readingStatus}">
+                                        <option selected value="0">Reading Status</option>
+                                        <option value="reading">Reading</option>
+                                        <option value="finished">Finished</option>
+                                        <option value="dropped">Dropped</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="rating" class="form-label">Rating</label>
+                                    <select id="rating" class="form-select" aria-label="Rating"
+                                            name="rating" th:field="${userBooks.rating}">
+                                        <option selected value="0">Book Rating</option>
+                                        <option value="1">✰</option>
+                                        <option value="2">✰ ✰</option>
+                                        <option value="3">✰ ✰ ✰ ✰</option>
+                                        <option value="4">✰ ✰ ✰ ✰ ✰</option>
+                                        <option value="5">✰ ✰ ✰ ✰ ✰ ✰</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate"
+                                           name="startDate" th:value="${userBooks.dateStarted}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="completedDate" class="form-label">Completed Date</label>
+                                    <input type="date" class="form-control" id="completedDate"
+                                           name="completedDate" th:value="${userBooks.dateCompleted}">
+                                </div>
+                            </div>
 
-<div class="card">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img th:src="${coverImage}" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title display-1" th:text="${book.title}">Card title</h5>
-                <p class="card-text display-5" th:text="${book.authorNames}">[Author, Name, List]</p>
-                <p class="card-text display-5" th:text="${book.description}">[Author, Name, List]</p>
-                <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small>
-                </p>
-                <form th:if="${loginId}" th:attr="action=@{/addUserBook}" method="POST">
-                    <div class="row">
-                        <div class="col">
-                            <label for="readingStatus" class="form-label">Reading Status</label>
-                            <select id="readingStatus" class="form-select" aria-label="Reading Status"
-                                    name="readingStatus" th:field="${userBooks.readingStatus}">
-                                <option selected value="0">Reading Status</option>
-                                <option value="reading">Reading</option>
-                                <option value="finished">Finished</option>
-                                <option value="dropped">Dropped</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="rating" class="form-label">Rating</label>
-                            <select id="rating" class="form-select" aria-label="Rating"
-                                    name="rating" th:field="${userBooks.rating}">
-                                <option selected value="0">Book Rating</option>
-                                <option value="1">✰</option>
-                                <option value="2">✰ ✰</option>
-                                <option value="3">✰ ✰ ✰ ✰</option>
-                                <option value="4">✰ ✰ ✰ ✰ ✰</option>
-                                <option value="5">✰ ✰ ✰ ✰ ✰ ✰</option>
-                            </select>
-                        </div>
+                            <!--                    hidden input for csrf token-->
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}"/>
+                            <!--                    hidden bookID to send to the UserBooksController-->
+                            <input type="hidden"
+                                   name="bookId"
+                                   th:value="${book.id}"/>
+                            <input type="submit" class="btn btn-success">
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="mb-3 col">
-                            <label for="startDate" class="form-label">Start Date</label>
-                            <input type="date" class="form-control" id="startDate"
-                                   name="startDate" th:value="${userBooks.dateStarted}">
-                        </div>
-                        <div class="mb-3 col">
-                            <label for="completedDate" class="form-label">Completed Date</label>
-                            <input type="date" class="form-control" id="completedDate"
-                                   name="completedDate" th:value="${userBooks.dateCompleted}">
-                        </div>
-                    </div>
-
-<!--                    hidden input for csrf token-->
-                    <input type="hidden"
-                           th:name="${_csrf.parameterName}"
-                           th:value="${_csrf.token}"/>
-<!--                    hidden bookID to send to the UserBooksController-->
-                    <input type="hidden"
-                           name="bookId"
-                           th:value="${book.id}"/>
-                    <input type="submit" class="btn btn-success">
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
