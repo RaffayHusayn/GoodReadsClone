@@ -26,10 +26,6 @@ public class WorkController {
     @Autowired
     public void setUserBooksRepository(UserBooksRepository userBooksRepository){ this.userBooksRepository = userBooksRepository;}
 
-    @GetMapping("/")
-    public String getHome(){
-        return "home";
-    }
 
     @GetMapping("/book/{bookId}")
     public String getBook(@PathVariable String bookId, Model model, @AuthenticationPrincipal OAuth2User principal){
