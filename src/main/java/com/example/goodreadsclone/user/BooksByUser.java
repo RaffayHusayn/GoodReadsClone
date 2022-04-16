@@ -1,5 +1,6 @@
 package com.example.goodreadsclone.user;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
@@ -49,6 +50,10 @@ public class BooksByUser {
     @CassandraType(type = Name.INT)
     private int rating;
 
+    public BooksByUser(){
+        this.timeUuid = Uuids.timeBased();
+    }
+
     public String getId() {
         return id;
     }
@@ -63,14 +68,6 @@ public class BooksByUser {
 
     public void setBookId(String bookId) {
         this.bookId = bookId;
-    }
-
-    public UUID getTimeUuid() {
-        return timeUuid;
-    }
-
-    public void setTimeUuid(UUID timeUuid) {
-        this.timeUuid = timeUuid;
     }
 
     public String getReadingStatus() {
