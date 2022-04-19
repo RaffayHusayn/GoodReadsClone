@@ -1,6 +1,7 @@
 package com.example.goodreadsclone.user;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
@@ -10,6 +11,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -49,6 +51,9 @@ public class BooksByUser {
     @Column("rating")
     @CassandraType(type = Name.INT)
     private int rating;
+
+    @Transient
+    private String coverUrl;
 
     public BooksByUser(){
         this.timeUuid = Uuids.timeBased();
@@ -108,5 +113,25 @@ public class BooksByUser {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+// because we are using .distinct() in the stream in the HomeController so we need a way to compare the BooksByUser objects
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BooksByUser)) return false;
+        BooksByUser that = (BooksByUser) o;
+        return id.equals(that.id) && bookId.equals(that.bookId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bookId);
     }
 }
