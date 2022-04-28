@@ -20,8 +20,8 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-1" th:text="${book.title}">Card title</h5>
-                        <p class="card-text display-5" th:text="${book.authorNames}">[Author, Name, List]</p>
-                        <p class="card-text display-5" th:text="${book.description}">[Author, Name, List]</p>
+                        <p class="card-text display-6" th:text="${book.authorNames}">[Author, Name, List]</p>
+                        <p class="card-text" th:text="${book.description}">[Author, Name, List]</p>
                         <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small>
                         </p>
                         <form th:if="${loginId}" th:attr="action=@{/addUserBook}" method="POST">
@@ -43,9 +43,9 @@
                                         <option selected value="0">Book Rating</option>
                                         <option value="1">✰</option>
                                         <option value="2">✰ ✰</option>
-                                        <option value="3">✰ ✰ ✰ ✰</option>
-                                        <option value="4">✰ ✰ ✰ ✰ ✰</option>
-                                        <option value="5">✰ ✰ ✰ ✰ ✰ ✰</option>
+                                        <option value="3">✰ ✰ ✰</option>
+                                        <option value="4">✰ ✰ ✰ ✰</option>
+                                        <option value="5">✰ ✰ ✰ ✰ ✰</option>
                                     </select>
                                 </div>
                             </div>

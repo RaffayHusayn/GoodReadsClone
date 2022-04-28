@@ -34,7 +34,9 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${book.bookName}">Book Name</h5>
+                            <h5>
+                                <a th:href="@{/book/{bookId}(bookId = ${book.bookId})}" class="card-title" th:text="${book.bookName}">Book Name</a>
+                            </h5>
                             <p class="card-text" th:text="${book.authorName}">Author</p>
                             <p class="card-text">
                                 <span th:each="rating: ${#numbers.sequence(0, book.rating - 1)}">&#9733;</span>
